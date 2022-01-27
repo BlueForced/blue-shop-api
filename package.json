@@ -9,5 +9,8 @@
     "express": "^4.17.2",
     "graphql": "^16.2.0"
   },
+  "scripts": {
+    "start": "node ./index.js"
+  },
   "type": "module"
 }

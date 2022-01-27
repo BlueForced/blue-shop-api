@@ -1,0 +1,14 @@
+type Query {
+  greetings: [Greeting!]!
+}
+
+type Greeting {
+  name: String!
+  greeting: GreetingEnum!
+}
+
+enum GreetingEnum {
+  Hi
+  Hello
+  Hey
+}
