@@ -1,0 +1,209 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Seller {
+  name      String     @id
+  products  Product[]
+  ShopFront ShopFront?
+  user      User?      @relation(fields: [userId], references: [id])
+  userId    String     @unique
+}
+
+model User {
+  id            String     @id @default(uuid())
+  firstName     String
+  lastName      String
+  phoneNumber   String?
+  emailAddress  String?
+  pfpLink       String?
+  ratings       Rating[]
+  questions     Question[]
+  answers       Answer[]
+  orders        Order[]
+  addresses     Address[]
+  sellerAccount Seller?
+  shoppingCart  Product[]
+}
+
+model ShopFront {
+  id               String       @id @default(uuid())
+  seller           Seller       @relation(fields: [sellerId], references: [name])
+  sellerId         String       @unique
+  bannerLink       String?
+  pfpLink          String?
+  selectMenus      Json
+  socialMediaLinks Json
+  entities         ShopEntity[]
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  GIF
+}
+
+enum ShopEntitySize {
+  MAIN
+  XL
+  L
+  MD
+  SM
+}
+
+model ShopEntity {
+  id          String         @id @default(uuid())
+  shopFront   ShopFront      @relation(fields: [shopFrontId], references: [id])
+  shopFrontId String
+  type        MediaType
+  mediaLink   String
+  link        String
+  size        ShopEntitySize
+  order       Int
+}
+
+model ProductCategory {
+  id       String    @id @default(uuid())
+  name     String
+  products Product[]
+}
+
+model Product {
+  id          String          @id @default(uuid())
+  seller      Seller          @relation(fields: [sellerId], references: [name])
+  sellerId    String
+  name        String
+  category    ProductCategory @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  properties  Json
+  description String
+  media       ProductMedia[]
+  dateAdded   DateTime        @default(now())
+  price       Float
+  ratings     Rating[]
+  variantTo   Product?        @relation("ProductToProduct", fields: [variantToId], references: [id])
+  variantToId String?         @unique
+  product     Product?        @relation("ProductToProduct")
+  questions   Question[]
+  orders      Order[]
+  inUserCarts User[]
+}
+
+model ProductMedia {
+  id        String    @id @default(uuid())
+  product   Product   @relation(fields: [productId], references: [id])
+  productId String
+  link      String
+  type      MediaType
+  isDeleted Boolean   @default(false)
+}
+
+model Rating {
+  id              String   @id @default(uuid())
+  user            User     @relation(fields: [userId], references: [id])
+  userId          String
+  product         Product  @relation(fields: [productId], references: [id])
+  productId       String
+  dateAdded       DateTime @default(now())
+  rating          Float
+  propertyRatings Json
+  review          Review?  @relation(fields: [reviewId], references: [id])
+  reviewId        String   @unique
+  isDeleted       Boolean  @default(false)
+}
+
+model Review {
+  id             String        @id @default(uuid())
+  rating         Rating?
+  content        String
+  foundHelpfulBy Int
+  media          ReviewMedia[]
+}
+
+model ReviewMedia {
+  id        String    @id @default(uuid())
+  review    Review    @relation(fields: [reviewId], references: [id])
+  reviewId  String
+  link      String
+  type      MediaType
+  isDeleted Boolean   @default(false)
+}
+
+model Question {
+  id        String   @id @default(uuid())
+  dateAdded DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  votes     Int      @default(0)
+  content   String
+  isDeleted Boolean  @default(false)
+  answers   Answer[]
+}
+
+model Answer {
+  id         String   @id @default(uuid())
+  dateAdded  DateTime @default(now())
+  author     User     @relation(fields: [authorId], references: [id])
+  authorId   String
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String
+  votes      Int      @default(0)
+  content    String
+  isDeleted  Boolean  @default(false)
+}
+
+model Address {
+  id           String   @id @default(uuid())
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String
+  addressOwner String
+  dateAdded    DateTime @default(now())
+  orders       Order[]
+}
+
+model paymentMethod {
+  id     Int     @id @default(autoincrement())
+  method String
+  orders Order[]
+}
+
+model Order {
+  id              String        @id @default(uuid())
+  placedBy        User          @relation(fields: [userId], references: [id])
+  userId          String
+  shippingAddress Address       @relation(fields: [addressId], references: [id])
+  addressId       String
+  datePlaced      DateTime      @default(now())
+  dateArrived     DateTime?
+  orderItems      Product[]
+  fees            OrderFees?
+  paymentMethod   paymentMethod @relation(fields: [paymentMethodId], references: [id])
+  paymentMethodId Int
+}
+
+model OrderFees {
+  id               String  @id @default(uuid())
+  order            Order   @relation(fields: [orderId], references: [id])
+  orderId          String  @unique
+  items            Float
+  shipping         Float
+  COD              Float   @default(0)
+  VAT              Float
+  promotions       Float
+  returnWindowOpen Boolean @default(true)
+}
+
+model Promotion {
+  promotionId String   @id @default(uuid())
+  code        String   @unique
+  value       Float
+  dateCreated DateTime @default(now())
+  validUntil  DateTime
+}
