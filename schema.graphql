@@ -30,7 +30,7 @@ type Seller {
   id: ID!
   name: String!
   products: [Product]!
-  ShopFront: ShopFront!
+  ShopFront: ShopFront
   user: User
 }
 
