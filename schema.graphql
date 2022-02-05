@@ -27,7 +27,8 @@ type User {
 }
 
 type Seller {
-  name: ID!
+  id: ID!
+  name: String!
   products: [Product]!
   ShopFront: ShopFront!
   user: User

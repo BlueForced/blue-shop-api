@@ -8,7 +8,8 @@ datasource db {
 }
 
 model Seller {
-  name      String     @id
+  id        String     @id @default(uuid())
+  name      String     @unique
   products  Product[]
   ShopFront ShopFront?
   user      User?      @relation(fields: [userId], references: [id])
@@ -40,7 +41,7 @@ model User {
 
 model ShopFront {
   id               String       @id @default(uuid())
-  seller           Seller       @relation(fields: [sellerId], references: [name])
+  seller           Seller       @relation(fields: [sellerId], references: [id])
   sellerId         String       @unique
   bannerLink       String?
   pfpLink          String?
@@ -88,7 +89,7 @@ model ProductCategory {
 
 model Product {
   id          String          @id @default(uuid())
-  seller      Seller          @relation(fields: [sellerId], references: [name])
+  seller      Seller          @relation(fields: [sellerId], references: [id])
   sellerId    String
   name        String
   category    ProductCategory @relation(fields: [categoryId], references: [id])
