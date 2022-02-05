@@ -1,14 +1,201 @@
 type Query {
-  greetings: [Greeting!]!
+  users: [User]!
+  sellers: [Seller]!
+  products: [Product]!
 }
 
-type Greeting {
+enum MediaType {
+  IMAGE
+  VIDEO
+  GIF
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String
+  emailAddress: String
+  pfpLink: String
+  ratings: [Rating]!
+  questions: [Question]!
+  answers: [Answer]!
+  orders: [Order]!
+  addresses: [Address]!
+  sellerAccount: Seller
+  shoppingCart: [Product]!
+}
+
+type Seller {
+  name: ID!
+  products: [Product]!
+  ShopFront: ShopFront!
+  user: User
+}
+
+type ShopFront {
+  id: ID!
+  seller: Seller!
+  bannerLink: String
+  pfpLink: String
+  selectMenus: String!
+  socialMediaLinks: String!
+  entities: [ShopEntity]!
+}
+
+enum ShopEntitySize {
+  MAIN
+  XL
+  L
+  MD
+  SM
+}
+
+type ShopEntity {
+  id: ID!
+  shopFront: ShopFront!
+  type: MediaType!
+  mediaLink: String!
+  link: String!
+  size: ShopEntitySize!
+  order: Int!
+}
+
+type Product {
+  id: ID!
+  seller: Seller!
   name: String!
-  greeting: GreetingEnum!
+  category: ProductCategory!
+  properties: String
+  description: String
+  media: [ProductMedia]!
+  dateAdded: String!
+  price: Float!
+  ratings: [Rating]!
+  ratingScore: Float
+  variantTo: Product
+  questions: [Question]!
+  orders: [Order]!
+  reviewsFoundHelpful: [Review]!
+  inUserCarts: [User]!
 }
 
-enum GreetingEnum {
-  Hi
-  Hello
-  Hey
+type ProductCategory {
+  id: ID!
+  name: String!
+  products: [Product]!
+}
+
+type ProductMedia {
+  id: ID!
+  product: Product!
+  link: String!
+  type: MediaType!
+}
+
+type Rating {
+  id: ID!
+  user: User!
+  product: Product!
+  dateAdded: String!
+  rating: Float!
+  propertyRatings: String
+  review: Review
+}
+
+type Review {
+  id: ID!
+  rating: Rating!
+  content: String
+  foundHelpfulBy: [User]!
+  foundHelpfulByNumber: Int
+  media: [ReviewMedia]!
+}
+
+type ReviewMedia {
+  id: ID!
+  review: Review!
+  link: String!
+  type: MediaType!
+}
+
+type Question {
+  id: ID!
+  dateAdded: String!
+  author: User!
+  product: Product!
+  votes: [QuestionVotes]!
+  votesNumber: Int!
+  content: String!
+  answers: [Answer]!
+}
+
+type QuestionVotes {
+  id: ID!
+  question: Question!
+  voter: User!
+  isUpvote: Boolean!
+  dateAdded: String!
+}
+
+type AnswerVotes {
+  id: ID!
+  answer: Answer!
+  voter: User!
+  isUpvote: Boolean!
+  dateAdded: String!
+}
+
+type Answer {
+  id: ID!
+  dateAdded: String!
+  author: User!
+  question: Question!
+  votes: [AnswerVotes]!
+  votesNumber: Int!
+  content: String!
+}
+
+type Address {
+  id: ID!
+  user: User!
+  addressOwner: String!
+  dateAdded: String!
+  orders: [Order]!
+}
+
+type paymentMethod {
+  id: ID!
+  method: String!
+  orders: [Order]!
+}
+
+type Order {
+  id: ID!
+  placedBy: User!
+  shippingAddress: Address!
+  datePlaced: String!
+  dateArrived: String
+  orderItems: [Product]!
+  fees: OrderFees!
+  paymentMethod: paymentMethod!
+}
+
+type OrderFees {
+  id: ID!
+  order: Order!
+  items: Float!
+  shipping: Float!
+  COD: Float!
+  VAT: Float!
+  promotions: Float!
+  returnWindowOpen: Boolean!
+}
+
+type Promotion {
+  id: ID!
+  code: String!
+  value: Float!
+  dateCreated: String!
+  validUntil: String!
 }
