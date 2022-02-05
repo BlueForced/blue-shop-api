@@ -158,6 +158,7 @@ model QuestionVotes {
   voter     User     @relation(fields: [voterId], references: [id])
   voterId   String
   isUpvote  Boolean
+  dateAdded DateTime @default(now())
 }
 
 model Answer {
@@ -179,6 +180,7 @@ model AnswerVotes {
   voter     User     @relation(fields: [voterId], references: [id])
   voterId   String
   isUpvote  Boolean
+  dateAdded DateTime @default(now())
 }
 
 model Address {
