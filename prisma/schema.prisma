@@ -226,7 +226,7 @@ model OrderFees {
 }
 
 model Promotion {
-  promotionId String   @id @default(uuid())
+  id String   @id @default(uuid())
   code        String   @unique
   value       Float
   dateCreated DateTime @default(now())
