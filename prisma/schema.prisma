@@ -113,7 +113,7 @@ model Rating {
   productId       String
   dateAdded       DateTime @default(now())
   rating          Float
-  propertyRatings Json
+  propertyRatings Json?
   review          Review?  @relation(fields: [reviewId], references: [id])
   reviewId        String   @unique
   isDeleted       Boolean  @default(false)
