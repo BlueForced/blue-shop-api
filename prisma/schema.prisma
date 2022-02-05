@@ -46,7 +46,7 @@ model ShopFront {
   bannerLink       String?
   pfpLink          String?
   selectMenus      Json
-  socialMediaLinks Json
+  socialMediaLinks Json?
   entities         ShopEntity[]
 
   @@map("shopFronts")

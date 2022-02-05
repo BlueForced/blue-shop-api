@@ -40,7 +40,7 @@ type ShopFront {
   bannerLink: String
   pfpLink: String
   selectMenus: String!
-  socialMediaLinks: String!
+  socialMediaLinks: String
   entities: [ShopEntity]!
 }
 
