@@ -92,6 +92,7 @@ model Product {
   questions   Question[]
   orders      Order[]
   inUserCarts User[]
+  isDeleted   Boolean         @default(false)
 }
 
 model ProductMedia {
