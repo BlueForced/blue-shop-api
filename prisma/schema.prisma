@@ -30,6 +30,8 @@ model User {
   addresses     Address[]
   sellerAccount Seller?
   shoppingCart  Product[]
+  questionVotes QuestionVotes[]
+  answerVotes   AnswerVotes[]
 }
 
 model ShopFront {
@@ -143,10 +145,19 @@ model Question {
   authorId  String
   product   Product  @relation(fields: [productId], references: [id])
   productId String
-  votes     Int      @default(0)
+  votes     QuestionVotes[]
   content   String
   isDeleted Boolean  @default(false)
   answers   Answer[]
+}
+
+model QuestionVotes {
+  id        String   @id @default(uuid())
+  question  Question  @relation(fields: [questionId], references: [id])
+  questionId  String
+  voter     User     @relation(fields: [voterId], references: [id])
+  voterId   String
+  isUpvote  Boolean
 }
 
 model Answer {
@@ -156,9 +167,18 @@ model Answer {
   authorId   String
   question   Question @relation(fields: [questionId], references: [id])
   questionId String
-  votes      Int      @default(0)
+  votes      AnswerVotes[]
   content    String
   isDeleted  Boolean  @default(false)
+}
+
+model AnswerVotes {
+  id        String   @id @default(uuid())
+  answer  Answer  @relation(fields: [answerId], references: [id])
+  answerId  String
+  voter     User     @relation(fields: [voterId], references: [id])
+  voterId   String
+  isUpvote  Boolean
 }
 
 model Address {
