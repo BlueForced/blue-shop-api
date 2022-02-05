@@ -13,6 +13,8 @@ model Seller {
   ShopFront ShopFront?
   user      User?      @relation(fields: [userId], references: [id])
   userId    String     @unique
+
+  @@map("sellers")
 }
 
 model User {
@@ -32,6 +34,8 @@ model User {
   shoppingCart        Product[]
   questionVotes       QuestionVotes[]
   answerVotes         AnswerVotes[]
+
+  @@map("users")
 }
 
 model ShopFront {
@@ -43,6 +47,8 @@ model ShopFront {
   selectMenus      Json
   socialMediaLinks Json
   entities         ShopEntity[]
+
+  @@map("shopFronts")
 }
 
 enum MediaType {
@@ -68,12 +74,16 @@ model ShopEntity {
   link        String
   size        ShopEntitySize
   order       Int
+
+  @@map("shopEntities")
 }
 
 model ProductCategory {
   id       String    @id @default(uuid())
   name     String
   products Product[]
+
+  @@map("productCategories")
 }
 
 model Product {
@@ -96,6 +106,8 @@ model Product {
   orders      Order[]
   inUserCarts User[]
   isDeleted   Boolean         @default(false)
+
+  @@map("products")
 }
 
 model ProductMedia {
@@ -105,6 +117,8 @@ model ProductMedia {
   link      String
   type      MediaType
   isDeleted Boolean   @default(false)
+
+  @@map("productsMedia")
 }
 
 model Rating {
@@ -119,6 +133,8 @@ model Rating {
   review          Review?  @relation(fields: [reviewId], references: [id])
   reviewId        String   @unique
   isDeleted       Boolean  @default(false)
+
+  @@map("ratings")
 }
 
 model Review {
@@ -127,6 +143,8 @@ model Review {
   content        String
   foundHelpfulBy User[]
   media          ReviewMedia[]
+
+  @@map("reviews")
 }
 
 model ReviewMedia {
@@ -136,6 +154,8 @@ model ReviewMedia {
   link      String
   type      MediaType
   isDeleted Boolean   @default(false)
+
+  @@map("reviewsMedia")
 }
 
 model Question {
@@ -149,6 +169,8 @@ model Question {
   content   String
   isDeleted Boolean         @default(false)
   answers   Answer[]
+
+  @@map("questions")
 }
 
 model QuestionVotes {
@@ -159,6 +181,8 @@ model QuestionVotes {
   voterId    String
   isUpvote   Boolean
   dateAdded  DateTime @default(now())
+
+  @@map("questionsVotes")
 }
 
 model Answer {
@@ -171,6 +195,8 @@ model Answer {
   votes      AnswerVotes[]
   content    String
   isDeleted  Boolean       @default(false)
+
+  @@map("answers")
 }
 
 model AnswerVotes {
@@ -181,6 +207,8 @@ model AnswerVotes {
   voterId   String
   isUpvote  Boolean
   dateAdded DateTime @default(now())
+
+  @@map("answersVotes")
 }
 
 model Address {
@@ -191,12 +219,16 @@ model Address {
   dateAdded    DateTime @default(now())
   orders       Order[]
   isDeleted    Boolean
+
+  @@map("addresses")
 }
 
 model paymentMethod {
   id     Int     @id @default(autoincrement())
   method String
   orders Order[]
+
+  @@map("paymentMethods")
 }
 
 model Order {
@@ -211,6 +243,8 @@ model Order {
   fees            OrderFees?
   paymentMethod   paymentMethod @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId Int
+
+  @@map("orders")
 }
 
 model OrderFees {
@@ -223,6 +257,8 @@ model OrderFees {
   VAT              Float
   promotions       Float
   returnWindowOpen Boolean @default(true)
+
+  @@map("ordersFees")
 }
 
 model Promotion {
@@ -231,4 +267,6 @@ model Promotion {
   value       Float
   dateCreated DateTime @default(now())
   validUntil  DateTime
+
+  @@map("promotions")
 }
