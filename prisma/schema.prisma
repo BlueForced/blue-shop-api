@@ -190,6 +190,7 @@ model Address {
   addressOwner String
   dateAdded    DateTime @default(now())
   orders       Order[]
+  isDeleted    Boolean
 }
 
 model paymentMethod {
