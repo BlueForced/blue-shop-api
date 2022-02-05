@@ -26,6 +26,7 @@ model User {
   questions     Question[]
   answers       Answer[]
   orders        Order[]
+  reviewsFoundHelpful Review[]
   addresses     Address[]
   sellerAccount Seller?
   shoppingCart  Product[]
@@ -122,7 +123,7 @@ model Review {
   id             String        @id @default(uuid())
   rating         Rating?
   content        String
-  foundHelpfulBy Int
+  foundHelpfulBy User[]
   media          ReviewMedia[]
 }
 
