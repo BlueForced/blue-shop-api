@@ -148,6 +148,7 @@ model Rating {
   reviewId        String   @unique
   isDeleted       Boolean  @default(false)
 
+  @@unique([productId, userId])
   @@map("ratings")
 }
 
