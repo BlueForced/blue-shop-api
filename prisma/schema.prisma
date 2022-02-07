@@ -40,16 +40,29 @@ model User {
 }
 
 model ShopFront {
-  id               String       @id @default(uuid())
-  seller           Seller       @relation(fields: [sellerId], references: [id])
-  sellerId         String       @unique
+  id               String          @id @default(uuid())
+  seller           Seller          @relation(fields: [sellerId], references: [id])
+  sellerId         String          @unique
   bannerLink       String?
   pfpLink          String?
   selectMenus      Json
   socialMediaLinks Json?
-  entities         ShopEntity[]
+  pages            ShopFrontPage[]
 
   @@map("shopFronts")
+}
+
+model ShopFrontPage {
+  id          String       @id @default(uuid())
+  shopFront   ShopFront?   @relation(fields: [shopFrontId], references: [id])
+  shopFrontId String
+  type        ShopPageType
+  entities    ShopEntity[]
+}
+
+enum ShopPageType {
+  HOME
+  NORMAL
 }
 
 enum MediaType {
@@ -67,14 +80,14 @@ enum ShopEntitySize {
 }
 
 model ShopEntity {
-  id          String         @id @default(uuid())
-  shopFront   ShopFront      @relation(fields: [shopFrontId], references: [id])
-  shopFrontId String
-  type        MediaType
-  mediaLink   String
-  link        String
-  size        ShopEntitySize
-  order       Int
+  id              String         @id @default(uuid())
+  shopFrontPage   ShopFrontPage  @relation(fields: [shopFrontPageId], references: [id])
+  shopFrontPageId String
+  type            MediaType
+  mediaLink       String
+  link            String
+  size            ShopEntitySize
+  order           Int
 
   @@map("shopEntities")
 }

@@ -41,6 +41,18 @@ type ShopFront {
   pfpLink: String
   selectMenus: String!
   socialMediaLinks: String
+  pages: [ShopFrontPage]!
+}
+
+enum ShopPageType {
+  HOME
+  NORMAL
+}
+
+type ShopFrontPage {
+  id: String!
+  shopFront: ShopFront!
+  type: ShopPageType!
   entities: [ShopEntity]!
 }
 
@@ -54,7 +66,7 @@ enum ShopEntitySize {
 
 type ShopEntity {
   id: ID!
-  shopFront: ShopFront!
+  shopFrontPage: ShopFrontPage!
   type: MediaType!
   mediaLink: String!
   link: String!
