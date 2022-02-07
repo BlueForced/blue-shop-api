@@ -107,7 +107,7 @@ model Product {
   name        String
   category    ProductCategory @relation(fields: [categoryId], references: [id])
   categoryId  String
-  properties  Json
+  properties  Json?
   description String
   media       ProductMedia[]
   dateAdded   DateTime        @default(now())
