@@ -2,7 +2,7 @@ import { ApolloServer, gql } from 'apollo-server-express';
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import express from 'express';
 import http from 'http';
-import resolvers from './resolvers.js';
+import resolvers from './resolvers/resolvers.js';
 import fs from 'fs';
 import path from 'path';
 
