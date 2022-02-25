@@ -2,6 +2,9 @@ type Query {
   users: [User]!
   sellers: [Seller]!
   products: [Product]!
+  user(id: ID!): User
+  seller(id: ID!): Seller
+  product(id: ID!): Product
 }
 
 enum MediaType {
