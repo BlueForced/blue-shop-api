@@ -144,8 +144,7 @@ model Rating {
   dateAdded       DateTime @default(now())
   rating          Float
   propertyRatings Json?
-  review          Review?  @relation(fields: [reviewId], references: [id])
-  reviewId        String   @unique
+  review          Review?
   isDeleted       Boolean  @default(false)
 
   @@unique([productId, userId])
@@ -153,8 +152,9 @@ model Rating {
 }
 
 model Review {
-  id             String        @id @default(uuid())
-  rating         Rating?
+  id             String       @id @default(uuid())
+  rating         Rating?      @relation(fields: [ratingId], references: [id])
+  ratingId       String       @unique
   content        String
   foundHelpfulBy User[]
   media          ReviewMedia[]
