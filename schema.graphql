@@ -90,7 +90,7 @@ type Product {
   ratings: [Rating]!
   ratingScore: Float
   ratingCount: Int
-  variantTo: Product
+  variants: [Product]!
   questions: [Question]!
   orders: [Order]!
 }
