@@ -112,7 +112,6 @@ type ProductMedia {
 
 type Rating {
   id: ID!
-  user: User!
   product: Product!
   dateAdded: String!
   rating: Float!
@@ -122,6 +121,7 @@ type Rating {
 
 type Review {
   id: ID!
+  user: User!
   rating: Rating!
   content: String
   foundHelpfulBy: [User]!
