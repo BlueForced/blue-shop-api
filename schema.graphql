@@ -93,8 +93,6 @@ type Product {
   variantTo: Product
   questions: [Question]!
   orders: [Order]!
-  reviewsFoundHelpful: [Review]!
-  inUserCarts: [User]!
 }
 
 type ProductCategory {
@@ -124,8 +122,7 @@ type Review {
   user: User!
   rating: Rating!
   content: String
-  foundHelpfulBy: [User]!
-  foundHelpfulByNumber: Int
+  foundHelpfulBy: Int
   media: [ReviewMedia]!
 }
 
