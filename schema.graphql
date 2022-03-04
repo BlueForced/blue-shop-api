@@ -87,7 +87,6 @@ type Product {
   media: [ProductMedia]!
   dateAdded: String!
   price: Float!
-  ratings: [Rating]!
   ratingScore: Float
   ratingCount: Int
   variants: [Product]!
