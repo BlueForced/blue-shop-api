@@ -114,7 +114,7 @@ model Product {
   price       Float
   ratings     Rating[]
   variantTo   Product?        @relation("ProductToProduct", fields: [variantToId], references: [id])
-  variantToId String?         @unique
+  variantToId String?         
   product     Product?        @relation("ProductToProduct")
   questions   Question[]
   orders      Order[]
