@@ -8,7 +8,7 @@ import path from 'path';
 
 const __dirname = path.resolve();
 const typeDefs = gql(
-  fs.readFileSync(path.join(__dirname, 'schema.graphql'), 'utf8')
+  fs.readFileSync(path.join(__dirname, 'src/schema.graphql'), 'utf8')
 );
 
 (async function startApolloServer() {
