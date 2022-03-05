@@ -203,6 +203,7 @@ model QuestionVotes {
   voterId    String
   isUpvote   Boolean
   dateAdded  DateTime @default(now())
+  isDeleted  Boolean  @default(false)
 
   @@map("questionsVotes")
 }
@@ -229,6 +230,7 @@ model AnswerVotes {
   voterId   String
   isUpvote  Boolean
   dateAdded DateTime @default(now())
+  isDeleted Boolean  @default(false)
 
   @@map("answersVotes")
 }
