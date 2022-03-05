@@ -14,7 +14,7 @@ model Seller {
   ShopFront ShopFront?
   user      User?      @relation(fields: [userId], references: [id])
   userId    String     @unique
-  isDeleted Boolean     @default(false)
+  isDeleted Boolean    @default(false)
 
   @@map("sellers")
 }
@@ -36,7 +36,7 @@ model User {
   shoppingCart        Product[]
   questionVotes       QuestionVotes[]
   answerVotes         AnswerVotes[]
-  isDeleted           Boolean @default(false)
+  isDeleted           Boolean         @default(false)
 
   @@map("users")
 }
@@ -50,7 +50,7 @@ model ShopFront {
   selectMenus      Json
   socialMediaLinks Json?
   pages            ShopFrontPage[]
-  isDeleted   Boolean      @default(false)
+  isDeleted        Boolean         @default(false)
 
   @@map("shopFronts")
 }
@@ -92,16 +92,16 @@ model ShopEntity {
   link            String
   size            ShopEntitySize
   order           Int
-  isDeleted   Boolean      @default(false)
+  isDeleted       Boolean        @default(false)
 
   @@map("shopEntities")
 }
 
 model ProductCategory {
-  id       String    @id @default(uuid())
-  name     String
-  products Product[]
-  isDeleted   Boolean      @default(false)
+  id        String    @id @default(uuid())
+  name      String
+  products  Product[]
+  isDeleted Boolean   @default(false)
 
   @@map("productCategories")
 }
@@ -120,7 +120,7 @@ model Product {
   price       Float
   ratings     Rating[]
   variantTo   Product?        @relation("ProductToProduct", fields: [variantToId], references: [id])
-  variantToId String?         
+  variantToId String?         @unique
   product     Product?        @relation("ProductToProduct")
   questions   Question[]
   orders      Order[]
@@ -158,13 +158,13 @@ model Rating {
 }
 
 model Review {
-  id             String       @id @default(uuid())
-  rating         Rating?      @relation(fields: [ratingId], references: [id])
-  ratingId       String
+  id             String        @id @default(uuid())
+  rating         Rating?       @relation(fields: [ratingId], references: [id])
+  ratingId       String        @unique
   content        String
   foundHelpfulBy User[]
   media          ReviewMedia[]
-  isDeleted   Boolean      @default(false)
+  isDeleted      Boolean       @default(false)
 
   @@map("reviews")
 }
@@ -246,10 +246,10 @@ model Address {
 }
 
 model paymentMethod {
-  id     Int     @id @default(autoincrement())
-  method String
-  orders Order[]
-  isDeleted   Boolean      @default(false)
+  id        Int     @id @default(autoincrement())
+  method    String
+  orders    Order[]
+  isDeleted Boolean @default(false)
 
   @@map("paymentMethods")
 }
@@ -266,7 +266,7 @@ model Order {
   fees            OrderFees?
   paymentMethod   paymentMethod @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId Int
-  isDeleted   Boolean      @default(false)
+  isDeleted       Boolean       @default(false)
 
   @@map("orders")
 }
@@ -281,7 +281,7 @@ model OrderFees {
   VAT              Float
   promotions       Float
   returnWindowOpen Boolean @default(true)
-  isDeleted   Boolean      @default(false)
+  isDeleted        Boolean @default(false)
 
   @@map("ordersFees")
 }
@@ -292,7 +292,7 @@ model Promotion {
   value       Float
   dateCreated DateTime @default(now())
   validUntil  DateTime
-  isDeleted   Boolean      @default(false)
+  isDeleted   Boolean  @default(false)
 
   @@map("promotions")
 }
