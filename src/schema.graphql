@@ -39,7 +39,6 @@ type Seller {
 
 type ShopFront {
   id: ID!
-  seller: Seller!
   bannerLink: String
   pfpLink: String
   selectMenus: String!
