@@ -105,7 +105,6 @@ type ProductMedia {
 
 type Rating {
   id: ID!
-  product: Product!
   dateAdded: String!
   rating: Float!
   propertyRatings: String
@@ -115,7 +114,6 @@ type Rating {
 type Review {
   id: ID!
   user: User!
-  rating: Rating!
   content: String
   foundHelpfulBy: Int
   media: [ReviewMedia]!
@@ -123,7 +121,6 @@ type Review {
 
 type ReviewMedia {
   id: ID!
-  review: Review!
   link: String!
   type: MediaType!
 }
@@ -141,7 +138,6 @@ type Question {
 
 type QuestionVotes {
   id: ID!
-  question: Question!
   voter: User!
   isUpvote: Boolean!
   dateAdded: String!
@@ -149,7 +145,6 @@ type QuestionVotes {
 
 type AnswerVotes {
   id: ID!
-  answer: Answer!
   voter: User!
   isUpvote: Boolean!
   dateAdded: String!
@@ -159,7 +154,6 @@ type Answer {
   id: ID!
   dateAdded: String!
   author: User!
-  question: Question!
   votes: [AnswerVotes]!
   votesNumber: Int!
   content: String!
@@ -192,7 +186,6 @@ type Order {
 
 type OrderFees {
   id: ID!
-  order: Order!
   items: Float!
   shipping: Float!
   COD: Float!
