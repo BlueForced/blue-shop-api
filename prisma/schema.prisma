@@ -62,6 +62,8 @@ model ShopFrontPage {
   type        ShopPageType
   entities    ShopEntity[]
   isDeleted   Boolean      @default(false)
+
+  @@map("shopFrontsPages")
 }
 
 enum ShopPageType {
