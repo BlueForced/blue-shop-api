@@ -86,6 +86,7 @@ type Product {
   price: Float!
   ratingScore: Float
   ratingCount: Int
+  reviews: [Rating]!
   variants: [Product]!
   questions: [Question]!
   orders: [Order]!

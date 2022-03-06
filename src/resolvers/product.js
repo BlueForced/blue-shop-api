@@ -15,6 +15,11 @@ const product = {
     prisma.question.findUnique({ where: { productId: parent.id } }),
   orders: parent => prisma.orders.findMany({ where: { productId: parent.id } }),
 
+  reviews: parent =>
+    prisma.rating.findMany({
+      where: { productId: parent.id, NOT: [{ review: null }] },
+    }),
+
   ratingScore: async parent => {
     return (
       await prisma.rating.aggregate({
