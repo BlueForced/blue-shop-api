@@ -53,7 +53,6 @@ enum ShopPageType {
 
 type ShopFrontPage {
   id: String!
-  shopFront: ShopFront!
   type: ShopPageType!
   entities: [ShopEntity]!
 }
