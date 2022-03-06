@@ -33,7 +33,7 @@ model User {
   reviewsFoundHelpful Review[]
   addresses           Address[]
   sellerAccount       Seller?
-  shoppingCart        Product[]
+  shoppingCart        CartItem[]
   questionVotes       QuestionVotes[]
   answerVotes         AnswerVotes[]
   isDeleted           Boolean         @default(false)
@@ -126,7 +126,7 @@ model Product {
   product     Product?        @relation("ProductToProduct")
   questions   Question[]
   orders      Order[]
-  inUserCarts User[]
+  inCarts     CartItem[]
   isDeleted   Boolean         @default(false)
 
   @@map("products")
@@ -141,6 +141,16 @@ model ProductMedia {
   isDeleted Boolean   @default(false)
 
   @@map("productsMedia")
+}
+
+model CartItem {
+  id        String    @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  @@map("cartItems")
 }
 
 model Rating {
