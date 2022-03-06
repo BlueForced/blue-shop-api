@@ -130,22 +130,20 @@ type Question {
   dateAdded: String!
   author: User!
   product: Product!
-  votes: [QuestionVotes]!
+  userVote: QuestionVote
   votesNumber: Int!
   content: String!
   answers: [Answer]!
 }
 
-type QuestionVotes {
+type QuestionVote {
   id: ID!
-  voter: User!
   isUpvote: Boolean!
   dateAdded: String!
 }
 
-type AnswerVotes {
+type AnswerVote {
   id: ID!
-  voter: User!
   isUpvote: Boolean!
   dateAdded: String!
 }
@@ -154,7 +152,7 @@ type Answer {
   id: ID!
   dateAdded: String!
   author: User!
-  votes: [AnswerVotes]!
+  userVote: AnswerVote
   votesNumber: Int!
   content: String!
 }
