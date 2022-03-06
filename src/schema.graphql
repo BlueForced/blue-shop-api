@@ -170,7 +170,6 @@ type Address {
 type paymentMethod {
   id: ID!
   method: String!
-  orders: [Order]!
 }
 
 type Order {
