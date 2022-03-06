@@ -67,7 +67,6 @@ enum ShopEntitySize {
 
 type ShopEntity {
   id: ID!
-  shopFrontPage: ShopFrontPage!
   type: MediaType!
   mediaLink: String!
   link: String!
