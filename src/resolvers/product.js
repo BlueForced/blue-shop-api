@@ -12,7 +12,7 @@ const product = {
       where: { variantToId: parent.variantToId },
     }),
   questions: parent =>
-    prisma.question.findUnique({ where: { productId: parent.id } }),
+    prisma.question.findMany({ where: { productId: parent.id } }),
   orders: parent => prisma.orders.findMany({ where: { productId: parent.id } }),
 
   reviews: parent =>
