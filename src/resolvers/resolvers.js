@@ -6,6 +6,7 @@ import ShopFrontPage from './shopFrontPage.js';
 import Rating from './rating.js';
 import Review from './review.js';
 import ProductCategory from './productCategory.js';
+import User from './user.js';
 
 const resolvers = {
   Query,
@@ -16,6 +17,7 @@ const resolvers = {
   Rating,
   Review,
   ProductCategory,
+  User,
 };
 
 export default resolvers;
