@@ -125,7 +125,7 @@ model Product {
   variantToId String?         @unique
   product     Product?        @relation("ProductToProduct")
   questions   Question[]
-  orders      Order[]
+  orders      OrderItems[]
   inCarts     CartItem[]
   isDeleted   Boolean         @default(false)
 
@@ -144,8 +144,8 @@ model ProductMedia {
 }
 
 model CartItem {
-  id        String    @id @default(uuid())
-  user      User     @relation(fields: [userId], references: [id])
+  id        String  @id @default(uuid())
+  user      User    @relation(fields: [userId], references: [id])
   userId    String
   product   Product @relation(fields: [productId], references: [id])
   productId String
@@ -276,13 +276,22 @@ model Order {
   addressId       String
   datePlaced      DateTime      @default(now())
   dateArrived     DateTime?
-  orderItems      Product[]
+  orderItems      OrderItems[]
   fees            OrderFees?
   paymentMethod   paymentMethod @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId Int
   isDeleted       Boolean       @default(false)
 
   @@map("orders")
+}
+
+model OrderItems {
+  id       String    @id @default(uuid())
+  order    Order     @relation(fields: [orderId], references: [id])
+  orderId  String
+  products Product[]
+
+  @@map("ordersItems")
 }
 
 model OrderFees {
