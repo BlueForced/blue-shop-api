@@ -10,6 +10,7 @@ import User from './user.js';
 import Question from './question.js';
 import Answer from './answer.js';
 import Address from './address.js';
+import Order from './order.js';
 
 const resolvers = {
   Query,
@@ -24,6 +25,7 @@ const resolvers = {
   Question,
   Answer,
   Address,
+  Order,
 };
 
 export default resolvers;
