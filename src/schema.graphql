@@ -130,7 +130,6 @@ type Question {
   id: ID!
   dateAdded: String!
   author: User!
-  product: Product!
   userVote: QuestionVote
   votesNumber: Int!
   content: String!
