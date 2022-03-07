@@ -8,6 +8,7 @@ import Review from './review.js';
 import ProductCategory from './productCategory.js';
 import User from './user.js';
 import Question from './question.js';
+import Answer from './answer.js';
 
 const resolvers = {
   Query,
@@ -20,6 +21,7 @@ const resolvers = {
   ProductCategory,
   User,
   Question,
+  Answer,
 };
 
 export default resolvers;
