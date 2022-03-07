@@ -295,27 +295,39 @@ model OrderItems {
 }
 
 model OrderFees {
-  id               String  @id @default(uuid())
-  order            Order   @relation(fields: [orderId], references: [id])
-  orderId          String  @unique
+  id               String          @id @default(uuid())
+  order            Order           @relation(fields: [orderId], references: [id])
+  orderId          String          @unique
   items            Float
   shipping         Float
-  COD              Float   @default(0)
+  COD              Float           @default(0)
   VAT              Float
   promotions       Float
-  returnWindowOpen Boolean @default(true)
-  isDeleted        Boolean @default(false)
+  returnWindowOpen Boolean         @default(true)
+  promotionsUsed   PromotionUses[]
+  isDeleted        Boolean         @default(false)
 
   @@map("ordersFees")
 }
 
 model Promotion {
-  id          String   @id @default(uuid())
-  code        String   @unique
+  id          String          @id @default(uuid())
+  code        String          @unique
   value       Float
-  dateCreated DateTime @default(now())
+  dateCreated DateTime        @default(now())
   validUntil  DateTime
-  isDeleted   Boolean  @default(false)
+  isDeleted   Boolean         @default(false)
+  uses        PromotionUses[]
 
   @@map("promotions")
+}
+
+model PromotionUses {
+  id          String    @id @default(uuid())
+  promotion   Promotion @relation(fields: [promotionId], references: [id])
+  promotionId String
+  orderFees   OrderFees @relation(fields: [orderFeesId], references: [id])
+  orderFeesId String
+
+  @@map("promotionsUses")
 }

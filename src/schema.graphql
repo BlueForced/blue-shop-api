@@ -187,6 +187,7 @@ type OrderFees {
   COD: Float!
   VAT: Float!
   promotions: Float!
+  promotionsUsed: [Promotion]!
   returnWindowOpen: Boolean!
 }
 
@@ -194,6 +195,5 @@ type Promotion {
   id: ID!
   code: String!
   value: Float!
-  dateCreated: String!
   validUntil: String!
 }
