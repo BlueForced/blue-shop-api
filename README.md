@@ -5,3 +5,4 @@ This uses Apollo server as a server, Prisma as an ORM and PostgreSQL as a databa
 
 ## Implemented features
 * Pretty much finished designing the entire DB prisma schema.
+* Designed the GraphQL schema and created most of the resolvers for queries.
