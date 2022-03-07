@@ -199,6 +199,6 @@ type Promotion {
 }
 
 type PromotionUses {
-  id:         ID!
-  promotion   Promotion!
+  id: ID!
+  promotion: Promotion!
 }
