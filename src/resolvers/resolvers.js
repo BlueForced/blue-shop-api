@@ -11,6 +11,8 @@ import Question from './question.js';
 import Answer from './answer.js';
 import Address from './address.js';
 import Order from './order.js';
+import OrderFees from './orderFees.js';
+import PromotionUses from './promotionUses.js';
 
 const resolvers = {
   Query,
@@ -26,6 +28,8 @@ const resolvers = {
   Answer,
   Address,
   Order,
+  OrderFees,
+  PromotionUses,
 };
 
 export default resolvers;
