@@ -9,6 +9,7 @@ import ProductCategory from './productCategory.js';
 import User from './user.js';
 import Question from './question.js';
 import Answer from './answer.js';
+import Address from './address.js';
 
 const resolvers = {
   Query,
@@ -22,6 +23,7 @@ const resolvers = {
   User,
   Question,
   Answer,
+  Address,
 };
 
 export default resolvers;
